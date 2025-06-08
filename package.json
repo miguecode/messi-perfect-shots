@@ -1,0 +1,22 @@
+{
+  "name": "messi-perfect-shots",
+  "version": "1.0.0",
+  "description": "My X/Twitter bot. Daily Messi pics at @MessiPF. Follow me!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "cloudinary": "^2.6.1",
+    "dotenv": "^16.5.0",
+    "twitter-api-v2": "^1.23.2"
+  }
+}
