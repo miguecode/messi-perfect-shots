@@ -38,7 +38,6 @@ async function getRandomImageUrlFromCloudinary(): Promise<{
   const { secure_url, public_id } = resources[randomIndex];
 
   console.log("📷 Se seleccionó una imagen.");
-  console.log("📄 URL: ", secure_url);
   console.log("📄 ID Pública: ", public_id);
 
   // Return an object with both values
@@ -117,7 +116,26 @@ async function updateDisplayName(publicId: string): Promise<void> {
       display_name: publicId,
     });
   } catch (error) {
-    console.error("No se pudo renombrar el display_name:", error);
+    console.error(`No se pudo renombrar el display_name: ${error}`);
+  }
+}
+
+/**
+ * Gets the new URL of the posted image from Cloudinary (to display in the console).
+ * The URL is new because we updated the public ID of the image.
+ */
+async function getNewUrlImageFromCloudinary(publicId: string): Promise<string> {
+  try {
+    const result = await cloudinary.api.resource(publicId, {
+      type: "upload",
+      resource_type: "image",
+    });
+    return result.secure_url;
+  } catch (error) {
+    console.error(
+      `No se pudo obtener la nueva URL de la imagen renombrada: ${error}`
+    );
+    return publicId;
   }
 }
 
@@ -148,6 +166,9 @@ async function run(): Promise<void> {
     console.log(
       `✅ [5/5] Public_id y display_name renombrados correctamente: ${renamedPublicId}`
     );
+
+    const newUrl = await getNewUrlImageFromCloudinary(renamedPublicId);
+    console.log(`\n🔗 URL de la imagen publicada y renombrada: ${newUrl}`);
 
     console.log(
       "\n🚀 Todo el proceso se completó correctamente. ¡Tweet publicado y backup hecho! 😁"

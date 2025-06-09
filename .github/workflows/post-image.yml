@@ -4,8 +4,9 @@ name: Post random Messi image to Twitter
 # Workflow trigger
 on:
   schedule:
-    - cron: "0 15 * * *" # Todos los días a las 15:00 UTC (12:00 Argentina)
-  workflow_dispatch:
+    - cron: "0 20 * * *" # 17:00 ARG
+    - cron: "0 24 * * *" # 21:00 ARG
+  workflow_dispatch: # Manual GitHub Actions
 
 # Jobs to do
 jobs:
