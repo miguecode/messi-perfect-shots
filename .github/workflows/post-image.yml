@@ -1,30 +1,33 @@
+# Workflow name
 name: Post random Messi image to Twitter
 
+# Workflow trigger
 on:
   schedule:
     - cron: "0 15 * * *" # Todos los días a las 15:00 UTC (12:00 Argentina)
-  workflow_dispatch: # Permite ejecutarlo manualmente desde GitHub
+  workflow_dispatch:
 
+# Jobs to do
 jobs:
   post-tweet:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout repo
+      - name: ⬇️ Clonar el repositorio
         uses: actions/checkout@v3
 
-      - name: 🟢 Setup Node.js
+      - name: 🟢 Configurar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: 📦 Install dependencies
+      - name: 📦 Instalar dependencias
         run: npm ci
 
-      - name: 🔧 Compile TypeScript
+      - name: 🔧 Compilar TypeScript
         run: npx tsc
 
-      - name: 🔑 Setup environment variables
+      - name: 🔑 Configurar variables de entorno
         run: |
           echo "TWITTER_API_KEY=${{ secrets.TWITTER_API_KEY }}" >> .env
           echo "TWITTER_API_SECRET=${{ secrets.TWITTER_API_SECRET }}" >> .env
@@ -34,5 +37,5 @@ jobs:
           echo "CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }}" >> .env
           echo "CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}" >> .env
 
-      - name: 🚀 Run bot
+      - name: 🚀 Ejecutar bot
         run: node dist/main.js
