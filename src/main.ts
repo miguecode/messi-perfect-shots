@@ -6,7 +6,10 @@ import { twitterClient } from "./twitterClient";
  * It fetches up to 100 images, sorts them by public_id in descending order,
  * and selects one randomly.
  */
-async function getRandomImageUrlFromCloudinary(): Promise<string> {
+async function getRandomImageUrlFromCloudinary(): Promise<{
+  secure_url: string;
+  public_id: string;
+}> {
   const result = await cloudinary.search
     .expression("folder:Messi")
     .sort_by("public_id", "desc")
@@ -23,14 +26,19 @@ async function getRandomImageUrlFromCloudinary(): Promise<string> {
 
   // If no resources are found, throw an error
   if (!resources || resources.length === 0) {
-    throw new Error("No se encontraron recursos en la carpeta llamada 'Messi'.");
+    throw new Error(
+      "No se encontraron recursos en la carpeta llamada 'Messi'."
+    );
   }
 
   // Select a random image
   const randomIndex = Math.floor(Math.random() * resources.length);
 
-  // Return the URL from the selected image
-  return resources[randomIndex].secure_url;
+  // Gets the secure_url and public_id from the selected image
+  const { secure_url, public_id } = resources[randomIndex];
+
+  // Return an object with both values
+  return { secure_url, public_id };
 }
 
 /**
@@ -42,7 +50,9 @@ async function downloadImageFromCloudinary(randomImageUrl: string) {
   const response = await fetch(randomImageUrl);
 
   if (!response.ok) {
-    throw new Error(`No se pudo descargar la imagen: ${response.statusText}`);
+    throw new Error(
+      `No se pudo descargar la imagen desde Cloudinary: ${response.statusText}`
+    );
   }
 
   // Convert the image data to a Node.js Buffer
@@ -74,20 +84,33 @@ async function postImageOnTwitter(mediaId: string): Promise<void> {
 }
 
 /**
+ * Moves the posted image to the posted images folder
+ */
+async function moveImageToPostedFolder(publicId: string): Promise<void> {
+  const newPublicId = publicId.replace("Messi/", "MessiPosted/");
+
+  await cloudinary.uploader.rename(publicId, newPublicId);
+}
+
+/**
  * Main runner function that orchestrates:
  * 1. Fetching a random image URL
  * 2. Downloading it
  * 3. Uploading it to Twitter
  * 4. Posting the tweet
+ * 5. Move the posted image
  */
 async function run(): Promise<void> {
   try {
-    const imageUrl = await getRandomImageUrlFromCloudinary();
-    const imageBuffer = await downloadImageFromCloudinary(imageUrl);
+    const { secure_url, public_id } = await getRandomImageUrlFromCloudinary();
+    const imageBuffer = await downloadImageFromCloudinary(secure_url);
     const mediaId = await uploadImageToTwitter(imageBuffer);
     await postImageOnTwitter(mediaId);
+    await moveImageToPostedFolder(public_id);
 
-    console.log(`✅ Tweet publicado correctamente. URL de la imagen: ${imageUrl}`);
+    console.log(
+      `✅ Tweet publicado correctamente. URL de la imagen: ${secure_url}`
+    );
   } catch (error) {
     console.error(`❌ Error al publicar el tweet: ${error}`);
   }
