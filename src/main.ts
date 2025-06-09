@@ -5,23 +5,20 @@ import { cloudinary } from "./cloudinaryClient";
 import { twitterClient } from "./twitterClient";
 
 /**
- * Gets a random image URL from the 'Messi' folder in Cloudinary (NOT MessiPosted/).
- * It fetches up to 100 images, sorts them by public_id in descending order,
- * and selects one randomly.
+ * Gets a random image URL from Cloudinary (except for images already posted).
  */
 async function getRandomImageUrlFromCloudinary(): Promise<{
   secure_url: string;
   public_id: string;
 }> {
   const result = await cloudinary.search
-    .expression("resource_type:image AND NOT public_id:MessiPosted/*")
-    .sort_by("public_id", "desc")
+    .expression("resource_type:image AND NOT public_id:Posted-*")
     .max_results(350)
     .execute();
 
   // If no result are found, throw an error
   if (!result) {
-    throw new Error("No hubo respuesta en la búsqueda de Cloudinary.");
+    throw new Error("Falló la búsqueda de Cloudinary, no hubo resultado.");
   }
 
   // Extract the resources from the response
@@ -30,7 +27,7 @@ async function getRandomImageUrlFromCloudinary(): Promise<{
   // If no resources are found, throw an error
   if (!resources || resources.length === 0) {
     throw new Error(
-      "No se encontraron recursos en la carpeta llamada 'Messi'."
+      "No se encontraron recursos en el resultado de búsqueda de Cloudinary."
     );
   }
 
@@ -97,11 +94,11 @@ async function postImageOnTwitter(mediaId: string): Promise<void> {
 }
 
 /**
- * Moves the posted image to the posted images folder
+ * Changes the public_id of the image (to prevent repetitions).
  */
-async function moveImageToPostedFolder(publicId: string): Promise<string> {
+async function updateImagePublicId(publicId: string): Promise<string> {
   try {
-    const newPublicId = `MessiPosted/${publicId}`;
+    const newPublicId = `Posted-${publicId}`;
     await cloudinary.uploader.rename(publicId, newPublicId);
     return newPublicId;
   } catch (error) {
@@ -111,12 +108,26 @@ async function moveImageToPostedFolder(publicId: string): Promise<string> {
 }
 
 /**
+ * Changes the display_name visible on the Cloudinary UI (a detail).
+ */
+async function updateDisplayName(publicId: string): Promise<void> {
+  try {
+    await cloudinary.uploader.explicit(publicId, {
+      type: "upload",
+      display_name: publicId,
+    });
+  } catch (error) {
+    console.error("No se pudo renombrar el display_name:", error);
+  }
+}
+
+/**
  * Main runner function that orchestrates:
  * 1. Fetching a random image URL
  * 2. Downloading it
  * 3. Uploading it to Twitter
  * 4. Posting the tweet
- * 5. Move the posted image
+ * 5. Update public_id and display_name of the image
  */
 async function run(): Promise<void> {
   try {
@@ -132,9 +143,10 @@ async function run(): Promise<void> {
     await postImageOnTwitter(mediaId);
     console.log("✅ [4/5] Tweet publicado correctamente.");
 
-    const renamedPublicId = await moveImageToPostedFolder(public_id);
+    const renamedPublicId = await updateImagePublicId(public_id);
+    await updateDisplayName(renamedPublicId);
     console.log(
-      `✅ [5/5] Public_id de la imagen renombrada correctamente: ${renamedPublicId}`
+      `✅ [5/5] Public_id y display_name renombrados correctamente: ${renamedPublicId}`
     );
 
     console.log(
