@@ -17,10 +17,10 @@ Esta nueva versión 2.0 representa una migración a tecnologías más sostenible
 | Característica       | Antes (JavaScript y local)                            | Ahora (TypeScript y en la nube)                       |
 |----------------------|-------------------------------------------------------|-------------------------------------------------------|
 | ✍ Lenguaje          | JavaScript                                            | TypeScript y YAML                                     |
-| 🚀 Ejecución         | Programador de Tareas de Windows (local)              | GitHub Actions (cloud, 100% automatizado)             |
+| 🚀 Ejecución         | Programador de Tareas (local)                         | GitHub Actions (cloud, 100% automatizado)             |
 | 📷 Imágenes          | Carpeta local en mi sistema                           | Cloudinary (almacenamiento en la nube)                |
-| 🤖 Funcionamiento    | Requería máquina encendida y conexión a Internet      | Se ejecuta solo desde GitHub                          |
-| 🔺 Escalabilidad     | Limitada a herramientas locales                       | Con Cloudinary y GitHub Actions hay más posibilidades |
+| 🤖 Funcionamiento    | Máquina encendida y conexión a Internet               | Se ejecuta solo desde GitHub                          |
+| 🔺 Escalabilidad     | Limitada a herramientas locales                       | Más flexible con GitHub Actions y Cloudinary          |
 
 ## ⚙️ ¿Cómo funciona?
 
