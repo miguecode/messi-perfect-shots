@@ -19,7 +19,7 @@ Esta nueva versión 2.0 representa una migración a tecnologías más sostenible
 | ✍ Lenguaje          | JavaScript                                            | TypeScript y YAML                                     |
 | 🚀 Ejecución         | Programador de Tareas (local)                         | GitHub Actions (cloud, 100% automatizado)             |
 | 📷 Imágenes          | Carpeta local en mi sistema                           | Cloudinary (almacenamiento en la nube)                |
-| 🤖 Funcionamiento    | Máquina encendida y conexión a Internet               | Se ejecuta solo desde GitHub                          |
+| 🤖 Funcionamiento    | Se realiza en mi máquina, 100% local                  | Se ejecuta solo desde GitHub                          |
 | 🔺 Escalabilidad     | Limitada a herramientas locales                       | Más flexible con GitHub Actions y Cloudinary          |
 
 ## ⚙️ ¿Cómo funciona?
