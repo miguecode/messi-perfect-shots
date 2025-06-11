@@ -8,7 +8,7 @@ Messi Perfect Shots es un **bot de X/Twitter** dedicado a publicar fotos de Lion
 
 👉 Link: [Messi Perfect Shots](https://x.com/MessiPF)
 
-![image](https://github.com/user-attachments/assets/588dc1ff-20c4-4b82-80fe-f7c057d70754)
+![Imagen del perfil](https://github.com/user-attachments/assets/edbab816-cfc6-4f41-b3cc-7e149ea60ad0)
 
 ## 🔍 ¿Qué cambió en esta nueva versión?
 
