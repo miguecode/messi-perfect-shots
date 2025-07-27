@@ -2,7 +2,7 @@
 
 Este proyecto es una reversión de mi proyecto bot de X/Twitter llamado **"Messi Perfect Shots"**, ahora reescrito en TypeScript y completamente automatizado en la nube usando Cloudinary y GitHub Actions.
 
-## ⚽ ¿Qué es Messi Perfect Shots?
+## ⚽ ¿Qué es Messi Perfect Shots?a
 
 Messi Perfect Shots es un **bot de X/Twitter** dedicado a publicar fotos de Lionel Messi todos los días, de forma automática y aleatoria. Empezó en abril de 2024 como un proyecto en JavaScript ejecutado localmente con el Programador de Tareas de Windows, y logró más de **4.000 seguidores en un año**, con más de **650 publicaciones** al día de hoy. 
 
