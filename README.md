@@ -79,7 +79,7 @@ También se puede ejecutar el flujo manualmente desde la **pestaña de Actions e
 
 ## 📂 Sobre el Proyecto anterior
 
-Como aclaré al principio, este proyecto es una reescritura de mi bot anterior hecho en JavaScript, el cual utilizaba carpetas locales y el Programador de Tareas de Windows. Si te interesa ver cómo funcionaba esa versión, podés revisarla en su repositorio: [Antiguo Proyecto](https://github.com/Leumig/mps-version-anterior). Aunque lo ideal sería hacerlo como vimos recién.
+Como aclaré al principio, este proyecto es una reescritura de mi bot anterior hecho en JavaScript, el cual utilizaba carpetas locales y el Programador de Tareas de Windows. Si te interesa ver cómo funcionaba esa versión, podés revisarla en su repositorio: [Antiguo Proyecto](https://github.com/miguecode/mps-version-anterior). Aunque lo ideal sería hacerlo como vimos recién.
 
 ## 📫 Contacto
 
