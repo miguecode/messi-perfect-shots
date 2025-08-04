@@ -4,11 +4,11 @@ Este proyecto es una reversión de mi proyecto bot de X/Twitter llamado **"Messi
 
 ## ⚽ ¿Qué es Messi Perfect Shots?
 
-Messi Perfect Shots es un **bot de X/Twitter** dedicado a publicar fotos de Lionel Messi todos los días, de forma automática y aleatoria. Empezó en abril de 2024 como un proyecto en JavaScript ejecutado localmente con el Programador de Tareas de Windows, y logró más de **4.000 seguidores en un año**, con más de **650 publicaciones** al día de hoy. 
+Messi Perfect Shots es un **bot de X/Twitter** dedicado a publicar fotos de Lionel Messi todos los días, de forma automática y aleatoria. Empezó en abril de 2024 como un proyecto en JavaScript ejecutado localmente con el Programador de Tareas de Windows, y logró más de **5.000 seguidores en un año**, con más de **800 publicaciones** al día de hoy. 
 
 👉 Link: [Messi Perfect Shots](https://x.com/MessiPF)
 
-![Imagen del perfil](https://github.com/user-attachments/assets/edbab816-cfc6-4f41-b3cc-7e149ea60ad0)
+![Imagen del perfil](https://github.com/user-attachments/assets/2e81f667-0e77-48db-bd92-791413284408)
 
 ## 🔍 ¿Qué cambió en esta nueva versión?
 
@@ -27,7 +27,7 @@ Esta nueva versión 2.0 representa una migración a tecnologías más sostenible
 1. **Selección aleatoria**: El bot elige una imagen aleatoria desde un repositorio en Cloudinary.
 2. **Publicación automática**: La imagen se publica en la cuenta de X/Twitter conectada: [@MessiPF](https://x.com/MessiPF).
 3. **Evita repeticiones**: Una vez publicada, la imagen es renombrada en Cloudinary con un prefijo (`Posted-`) para evitar volver a usarla.
-4. **Automatización diaria**: Gracias a GitHub Actions, el bot se ejecuta automáticamente todos los días a las **17:00 y 21:00 hora Argentina**.
+4. **Automatización diaria**: Gracias a GitHub Actions, el bot se ejecuta automáticamente todos los días a las **17:00 y 22:00 hora Argentina**.
 
 ## 🧪 Tecnologías usadas
 
